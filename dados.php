@@ -18,7 +18,23 @@
         <p><strong>Endereço:</strong> <?php echo $_POST['endereco']; ?></p>
         <p><strong>Telefone:</strong> <?php echo $_POST['telefone']; ?></p>
         <p><strong>Data de Nascimento:</strong> <?php echo $_POST['datanasc']; ?></p>
-        //colocar o campo de aparecer a foto aqui.....
+        <div>
+            //mudar depois antes do lf perguntar sobre tudo isso
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arq'])) {
+
+                $nome = $_FILES['arq']['name'];
+                $tmp = $_FILES['arq']['tmp_name'];
+
+                $caminho = "uploads/" . $nome;
+
+                move_uploaded_file($tmp, $caminho);
+            }?>
+            <div style="align-items: center; display: flex; flex-direction: column;">
+                <?php echo "<img src='$caminho' width='500' height=auto>"; ?>
+            </div>
+            
+        </div>
     </div>
 </body>
 
