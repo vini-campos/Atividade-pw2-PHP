@@ -55,6 +55,9 @@
 
             <div class="mb-4 mt-3">
                 <label for="arquivo" class="form-label">Foto</label>
+                <div id="div-img-preview">
+
+                </div>
                 <input type="file" class="form-control" accept="image/*" name="arq" id="arquivo">
             </div>
 
@@ -63,6 +66,7 @@
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/preview.js"></script>
 </body>
 
 </html>

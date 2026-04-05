@@ -19,7 +19,6 @@
         <p><strong>Telefone:</strong> <?php echo $_POST['telefone']; ?></p>
         <p><strong>Data de Nascimento:</strong> <?php echo $_POST['datanasc']; ?></p>
         <div>
-            //mudar depois antes do lf perguntar sobre tudo isso
             <?php
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arq'])) {
 
