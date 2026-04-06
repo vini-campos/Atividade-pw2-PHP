@@ -18,7 +18,7 @@ input.addEventListener('change', event => {
         preview.id = 'imagem-selecionada';
 
         preview.onload = () => {
-            let maxSize = 150;
+            let maxSize = 250;
 
             let largura = preview.naturalWidth;
             let altura = preview.naturalHeight;

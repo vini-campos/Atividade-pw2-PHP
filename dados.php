@@ -10,16 +10,29 @@
 </head>
 
 <body>
+
+    
+
     <div class="form-container">
         <h1>Dados do Formulário</h1>
         <p><strong>Nome:</strong> <?php echo $_POST['nome']; ?></p>
         <p><strong>Sobrenome:</strong> <?php echo $_POST['sobrenome']; ?></p>
         <p><strong>Email:</strong> <?php echo $_POST['email']; ?></p>
         <p><strong>Endereço:</strong> <?php echo $_POST['endereco']; ?></p>
-        <p><strong>Telefone:</strong> <?php echo $_POST['telefone']; ?></p>
-        <p><strong>Data de Nascimento:</strong> <?php echo $_POST['datanasc']; ?></p>
+        <?php
+            $telefone = $_POST['telefone'];
+            $a = substr($telefone,  0, 2);
+        ?>
+        <p><strong>Telefone:</strong> <?php echo $telefone?></p>
+        <?php
+            $a = $_POST["datanasc"];
+            $d = new DateTime("$a", new DateTimeZone("America/Sao_Paulo"));
+        ?>
+        <p><strong>Data de Nascimento:</strong> <?php echo $d->format("d/m/Y")?></p>
+        
         <div>
             <?php
+
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arq'])) {
 
                 $nome = $_FILES['arq']['name'];
@@ -28,11 +41,11 @@
                 $caminho = "uploads/" . $nome;
 
                 move_uploaded_file($tmp, $caminho);
-            }?>
+            } ?>
             <div style="align-items: center; display: flex; flex-direction: column;">
                 <?php echo "<img src='$caminho' width='500' height=auto>"; ?>
             </div>
-            
+
         </div>
     </div>
 </body>

@@ -10,7 +10,7 @@
 
 <body>
     <div class="form-container">
-        <h1>Formulário de Cadastro</h1>
+        <h2>Formulário de Cadastro</h2>
 
         <form action="dados.php" method="post" enctype="multipart/form-data">
             <div class="row-cols-2-custom">
@@ -27,13 +27,13 @@
                 </div>
             </div>
 
-            <div class="mb-3 mt-3">
+            <div class="mb-1">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" id="email" maxlength="50"
                     placeholder="Seu email" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-1">
                 <label for="end" class="form-label">Endereço</label>
                 <input type="text" class="form-control" name="endereco" id="end" maxlength="50"
                     placeholder="Seu endereço" required>
@@ -42,7 +42,7 @@
             <div class="row-cols-2-custom">
                 <div>
                     <label for="tel" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" name="telefone" id="tel" maxlength="50"
+                    <input type="tel" class="form-control" name="telefone" id="tel" maxlength="15"
                         placeholder="(00) 00000-0000" required>
                 </div>
 
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="mb-4 mt-3">
+            <div class="mb-1">
                 <label for="arquivo" class="form-label">Foto</label>
                 <div id="div-img-preview">
 
@@ -61,12 +61,41 @@
                 <input type="file" class="form-control" accept="image/*" name="arq" id="arquivo">
             </div>
 
-            <button type="submit" class="btn-submit">Enviar</button>
+            <button type="submit" class="btn-submit mt-3">Enviar</button>
         </form>
     </div>
+    <script>
+        function formatarTelefone(valor) {
+            // Remove tudo que não for número
+            valor = valor.replace(/\D/g, "");
+
+            // Aplica máscara conforme o tamanho
+            if (valor.length > 10) {
+                // Formato: (99) 99999-9999
+                valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (valor.length > 5) {
+                // Formato: (99) 9999-9999
+                valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (valor.length > 2) {
+                // Formato: (99) 9999
+                valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+            } else {
+                // Apenas abre parênteses
+                valor = valor.replace(/^(\d*)/, "($1");
+            }
+
+            return valor;
+        }
+
+        // Captura o campo e aplica a máscara em tempo real
+        document.getElementById("tel").addEventListener("input", function(e) {
+            e.target.value = formatarTelefone(e.target.value);
+        });
+    </script>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/preview.js"></script>
+
 </body>
 
 </html>
