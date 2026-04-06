@@ -3,6 +3,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+/*ajustes para dividir a tela na metade */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form-esquerda {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.form-direita {
+    background: #c7c7c7;
+    border-radius: 10px;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    margin-left: 25%;
 }
 
 .form-container {
@@ -11,11 +39,16 @@ body {
     padding: 35px;
     max-width: 600px;
     width: 100%;
-    max-height: 100vh;
 }
 
 .form-container h2 {
     text-align: center;
+}
+
+.form-container h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .form-label {
@@ -53,12 +86,28 @@ body {
     gap: 15px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 990px) {
+    .form-grid {
+        /*unica coluna*/
+        grid-template-columns: 1fr;
+    }
+
+    .form-direita {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
     .row-cols-2-custom {
         grid-template-columns: 1fr;
     }
 
     .form-container {
+        padding: 15px;
+    }
+
+    .form-direita {
         padding: 15px;
     }
 }
