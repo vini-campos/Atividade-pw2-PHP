@@ -13,37 +13,48 @@
     <div class="form-grid">
         <div class="form-esquerda">
             <div class="form-container">
+                <?php
+                    $nome = $_POST["nome"];
+                    //primeira letra maiuscula no nnome e sobrenome
+                    $nome = ucfirst($nome);
+
+                    $sobrenome = $_POST["sobrenome"];
+                    $sobrenome = ucfirst($sobrenome);
+
+                    $email = $_POST["email"];
+                    $endereco = $_POST["endereco"];
+                    $telefone = $_POST["telefone"];
+                    $datanasc = $_POST["datanasc"];
+
+                    $b = $datanasc;
+                    $c = new DateTime("$b", new DateTimeZone("America/Sao_Paulo"));
+                    $dataformatada = $c ->format("d/m/Y");
+                ?>
+
                 <h1>Dados do Formulário</h1>
-                <p><strong>Nome:</strong> <?php echo $_POST['nome']; ?></p>
-                <p><strong>Sobrenome:</strong> <?php echo $_POST['sobrenome']; ?></p>
-                <p><strong>Email:</strong> <?php echo $_POST['email']; ?></p>
-                <p><strong>Endereço:</strong> <?php echo $_POST['endereco']; ?></p>
-                <?php
-                    $telefone = $_POST['telefone'];
-                    $a = substr($telefone,  0, 2);
-                ?>
-                <p><strong>Telefone:</strong> <?php echo $telefone?></p>
-                <?php
-                    $a = $_POST["datanasc"];
-                    $d = new DateTime("$a", new DateTimeZone("America/Sao_Paulo"));
-                ?>
-                <p><strong>Data de Nascimento:</strong> <?php echo $d->format("d/m/Y")?></p>
+                <p><strong>Nome:</strong> <?php echo $nome; ?></p>
+                <p><strong>Sobrenome:</strong> <?php echo $sobrenome; ?></p>
+                <p><strong>Email:</strong> <?php echo $email; ?></p>
+                <p><strong>Endereço:</strong> <?php echo $endereco; ?></p>
+                <p><strong>Telefone:</strong> <?php echo $telefone; ?></p>
+                <p><strong>Data de Nascimento:</strong> <?php echo $dataformatada; ?></p>
             </div>
         </div>
 
         <div class="form-direita">
             <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arq'])) {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['arq']))
+                {
                     $nome = $_FILES['arq']['name'];
-                    $tmp = $_FILES['arq']['tmp_name'];
+                    $temporario = $_FILES['arq']['tmp_name'];
                     $caminho = "uploads/" . $nome;
-                    move_uploaded_file($tmp, $caminho);
+                    move_uploaded_file($temporario, $caminho);
                 }
             ?>
-            <div style="align-items: center; justify-content: center; display: flex;">
+            <div class="foto-enviada">
                 <?php echo "<img src='$caminho' style='max-width: 100%; height: auto; max-height: 300px;'>"; ?>
             </div>
-        </div>
+        </div>  
     </div>
 </body>
 
