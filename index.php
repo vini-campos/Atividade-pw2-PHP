@@ -49,7 +49,7 @@
                 <div>
                     <label for="dtnasc" class="form-label">Data de nascimento</label>
                     <input type="date" class="form-control" name="datanasc" id="dtnasc"
-                        min="2012-01-01" max="2020-12-31" required>
+                        min="1950-01-01" max="2008-12-31" required>
                 </div>
             </div>
 
