@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,6 +45,9 @@
                     <label for="tel" class="form-label">Telefone</label>
                     <input type="tel" class="form-control" name="telefone" id="tel" maxlength="15"
                         placeholder="(00) 00000-0000" required>
+                    <div id="erro-tel" style="color:red; display:none;">
+                        Número incompleto
+                    </div>
                 </div>
 
                 <div>
@@ -65,31 +69,53 @@
         </form>
     </div>
     <script>
-        function formatarTelefone(valor) {
-            // Remove tudo que não for número
-            valor = valor.replace(/\D/g, "");
+        const input = document.getElementById("tel");
+        const erro = document.getElementById("erro-tel");
+        const form = document.querySelector("form");
 
-            // Aplica máscara conforme o tamanho
-            if (valor.length > 10) {
-                // Formato: (99) 99999-9999
-                valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
-            } else if (valor.length > 5) {
-                // Formato: (99) 9999-9999
-                valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-            } else if (valor.length > 2) {
-                // Formato: (99) 9999
-                valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-            } else {
-                // Apenas abre parênteses
-                valor = valor.replace(/^(\d*)/, "($1");
-            }
-
-            return valor;
+        function soNumeros(v) {
+            return v.replace(/\D/g, '');
         }
 
-        // Captura o campo e aplica a máscara em tempo real
-        document.getElementById("tel").addEventListener("input", function(e) {
+        function formatarTelefone(valor) {
+            let v = soNumeros(valor);
+
+            if (v.length > 2) {
+                v = "(" + v.slice(0, 2) + ") " + v.slice(2);
+            }
+
+            if (v.length > 10) {
+                v = v.slice(0, 10) + "-" + v.slice(10);
+            }
+
+            return v;
+        }
+
+        function validarTelefone(valor) {
+            return soNumeros(valor).length === 11;
+        }
+
+        input.addEventListener("input", function(e) {
             e.target.value = formatarTelefone(e.target.value);
+        });
+
+        input.addEventListener("blur", function() {
+            if (!validarTelefone(input.value) && input.value.length > 0) {
+                erro.style.display = "block";
+                input.style.borderColor = "red";
+            } else {
+                erro.style.display = "none";
+                input.style.borderColor = "";
+            }
+        });
+
+        form.addEventListener("submit", function(e) {
+            if (!validarTelefone(input.value)) {
+                e.preventDefault();
+
+                erro.style.display = "block";
+                input.style.borderColor = "red";
+            }
         });
     </script>
 
