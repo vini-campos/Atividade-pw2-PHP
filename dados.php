@@ -15,7 +15,7 @@
             <div class="form-container">
                 <?php
                     $nome = $_POST["nome"];
-                    //primeira letra maiuscula no nnome e sobrenome
+                    //primeira letra maiuscula no nome e sobrenome
                     $nome = ucfirst($nome);
 
                     $sobrenome = $_POST["sobrenome"];

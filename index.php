@@ -62,8 +62,7 @@
                 <div id="div-img-preview">
 
                 </div>
-                <input type="file" class="form-control" accept="image/*" name="arq" id="arquivo"
-                    required="Selecione uma imagem">
+                <input type="file" class="form-control" accept="image/*" name="arq" id="arquivo">
             </div>
 
             <button type="submit" class="btn-submit mt-3">Enviar</button>
